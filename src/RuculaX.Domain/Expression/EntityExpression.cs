@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
-using RuculaX.Domain;
 
-namespace RuculaX.EntityFramework;
+namespace RuculaX.Domain;
 
 ///<summary>
 /// Provides methods for creating Unique Identity expressions

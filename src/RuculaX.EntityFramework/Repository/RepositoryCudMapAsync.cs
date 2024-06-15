@@ -12,7 +12,7 @@ public class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper
         where TentityDto : Identity<TType>
         where TMapper: IRuculaMap<TentityDto, TEntity>
 {
-    TMapper Mapper;
+    private TMapper Mapper;
 
     public RepositoryCudMApAsync(DbContext context, TMapper mapper) : base(context)
     {
