@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/RuculaX.EntityFramework/RuculaX.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\src\RuculaX.EntityFramework\RuculaX.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
