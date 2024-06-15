@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exemplo Rucula</title>
+        <style>
+            body{
+                margin: 0;
+            }
+            *{
+                font-family: "DM Sans", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="js">
+        </div>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rucula-js/rucula-js@master/dist/style/style.css"/>
+
+        <script type="module" >
+            
+            import {Rucula} from 'https://cdn.jsdelivr.net/gh/rucula-js/rucula-js@master/dist/rucula.js'
+            
+            let config = {
+                floatLabel:true, 
+                environments:[
+                    {
+                        env:"development",
+                        hostname:"http://localhost",
+                        port: "5016"
+                    }
+                ],
+                localizations:[
+                    {
+                        locales:"pt-BR",
+                        language:"🇧🇷 Brasil" ,
+                        currency:"BRL",
+                        maxDecimal:5
+                    }
+                ] 
+            }   
+
+            let input  = {
+                name: "Olá Mundo",
+                pathController: "/OlaMundo",
+                type: "crud",
+                crud:"crud",
+                
+                messageHome: "Ola Mundo",
+                iconHome: "bi-rocket-takeoff",
+                frames: [
+                    {
+                        name: "Integrante",
+                        objectDto: "integrante",
+                        alias: "aliasIntegrante",
+                        vertical:false,
+                        fields: [
+                            {
+                                propertDto: "nome",
+                                description: "nome",
+                                maxLength: 40,
+                                requerid:true,
+                                width:450
+                            },
+                            {
+                                propertDto: "dataNascimento",
+                                description: "Data de Nascimento",
+                                type:"date",
+                                requerid:true
+                            },
+                            {
+                                propertDto: "telefoneCelular",
+                                description: "Telefone Celular",
+                                requerid:true
+                            },
+                            {
+                                propertDto: "serveIgreja",
+                                description: "Serve na igreja",
+                                requerid:true
+                            },
+                            {
+                                propertDto: "batizado",
+                                description: "batizado",
+                                requerid:true,
+                                type:["checkbox", "bool"],
+                                checkbox: {
+                                    on: true,
+                                    off: false
+                                },
+                                groupFormat:"right"
+
+                            },
+                            {
+                                propertDto: "estadoCivil",
+                                description: "Estado Civil",
+                                requerid:true,
+                                type:["select","text"],
+                                combo:[
+                                { representation:"casado", value:"crud" },
+                                { representation:"divorciado", value:"crud" },
+                                { representation:"separado", value:"crud" },
+                                { representation:"amasiado", value:"crud" }
+                                
+                            ],
+                            with:500
+
+                            },
+                            {
+                                propertDto: "serveIgreja",
+                                description: "Serve na igreja",
+                                requerid:true,
+
+                            }
+
+                        ]
+                    }
+                ],
+                layout:{
+                    items:
+                    [
+                        ["aliasIntegrante"]
+                    ]
+                },
+                button: [
+                {
+                    type: "link",
+                    target: "window-icons",
+                    text:"Icones ",
+                    link:"https://icons.getbootstrap.com"
+                }  
+                ]
+                }
+
+        
+            let rucula = new Rucula(config,input,"js");
+        
+        </script>
+    </body>
+</html>

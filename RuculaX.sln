@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuculaX.EntityFramework", "src\RuculaX.EntityFramework\RuculaX.EntityFramework.csproj", "{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D11612EF-F39B-4E2F-8559-D8BA941513FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuculaX.EntityFramework.Test", "test\RuculaX.EntityFramework.Test\RuculaX.EntityFramework.Test.csproj", "{C0F1B657-FD8D-4DD5-AC8F-15C936A70356}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuculaX.Domain", "src\RuculaX.Domain\RuculaX.Domain.csproj", "{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruculax.Database", "src\RuculaX.Database\Ruculax.Database.csproj", "{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC28DBE9-1A05-48FD-BE6F-E70C63A1360E} = {B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}
+		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356} = {D11612EF-F39B-4E2F-8559-D8BA941513FF}
+		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30} = {B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}
+		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0} = {B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}
+	EndGlobalSection
+EndGlobal
