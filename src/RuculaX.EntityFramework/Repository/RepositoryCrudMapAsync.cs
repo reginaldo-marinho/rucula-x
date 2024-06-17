@@ -5,8 +5,8 @@ using RuculaX.Domain;
 
 
 namespace RuculaX.EntityFramework;
-public class RepositoryCrudMapAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
-    RepositoryCrudBaseAsync<TEntity,TIdentity,TType>,
+public class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
+    RepositoryCudBaseAsync<TEntity,TIdentity,TType>,
     ICommandDtoAsync<TentityDto,TEntity,TIdentity>
         where TEntity : Entity<TType>
         where TentityDto : Entity<TType>
@@ -14,7 +14,7 @@ public class RepositoryCrudMapAsync<TEntity, TentityDto,TIdentity, TType, TMappe
 {
     private TMapper Mapper;
 
-    public RepositoryCrudMapAsync(DbContext context, TMapper mapper) : base(context)
+    public RepositoryCudMApAsync(DbContext context, TMapper mapper) : base(context)
     {
         Mapper = mapper;
     }

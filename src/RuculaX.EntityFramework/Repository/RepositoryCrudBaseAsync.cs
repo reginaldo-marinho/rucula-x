@@ -5,11 +5,11 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public abstract class RepositoryCudBaseAsync<TEntity,TIdentity,TType> : ICommandAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
+public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICommandAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
 {
     private DbSet<TEntity> DbSet;
 
-    public  RepositoryCudBaseAsync(DbContext context)
+    public  RepositoryCrudBaseAsync(DbContext context)
     {
         DbSet = context.GetModel<TEntity,TType>(); 
     }
