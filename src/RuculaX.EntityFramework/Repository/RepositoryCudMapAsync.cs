@@ -8,8 +8,8 @@ namespace RuculaX.EntityFramework;
 public class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
     RepositoryCudBaseAsync<TEntity,TIdentity,TType>,
     ICommandDtoAsync<TentityDto,TEntity,TIdentity>
-        where TEntity : Identity<TType>
-        where TentityDto : Identity<TType>
+        where TEntity : Entity<TType>
+        where TentityDto : Entity<TType>
         where TMapper: IRuculaMap<TentityDto, TEntity>
 {
     private TMapper Mapper;

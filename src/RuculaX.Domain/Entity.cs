@@ -1,12 +1,9 @@
 ﻿namespace RuculaX.Domain;
 
-public abstract class Identity<T> 
+
+public class Entity<T>
 {
     public T? Id {get;set;}   
-}
-
-public class Entity<T> : Identity<T>
-{
     
 }
 public interface ICustomEntity

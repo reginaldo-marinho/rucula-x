@@ -5,7 +5,7 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public abstract class RepositoryCudBaseAsync<TEntity,TIdentity,TType> : ICommandAsync<TEntity,TIdentity> where TEntity : Identity<TType>                                                                                                                                                              
+public abstract class RepositoryCudBaseAsync<TEntity,TIdentity,TType> : ICommandAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
 {
     private DbSet<TEntity> DbSet;
 
@@ -16,14 +16,6 @@ public abstract class RepositoryCudBaseAsync<TEntity,TIdentity,TType> : ICommand
 
     public virtual async Task AlterAsync(TEntity input)
     {
-        Type type = input.GetType();
-
-        Type Identity = GetEntityBase(type);
-
-        if(Identity?.FullName == typeof(Identity<TType>).FullName)
-        {
-
-        }
     }
 
     public  virtual async Task AlterAsync(TEntity input, TIdentity identity)
@@ -50,25 +42,5 @@ public abstract class RepositoryCudBaseAsync<TEntity,TIdentity,TType> : ICommand
     public async Task InsertAsync(TEntity input)
     {
         await DbSet.AddAsync(input);
-    }
-
-    public Type GetEntityBase(Type type)
-    {
-        if(type.BaseType?.FullName == typeof(Object).FullName)
-        {
-            throw new RepositoryException(string.Format(RepositoryException.ClassNotContainValidBaseClass,nameof(TEntity)));
-        }
-
-        if(type.BaseType?.FullName == typeof(Identity<TType>).FullName){
-            return type.BaseType;
-        }
-
-        Type CustomEntity = type.GetInterface(nameof(ICustomEntity));
-
-        if(CustomEntity is not null){
-            return type;
-        }
-
-        return GetEntityBase(type.BaseType);
     }
 }

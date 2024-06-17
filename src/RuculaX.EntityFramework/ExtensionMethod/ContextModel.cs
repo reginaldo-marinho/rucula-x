@@ -6,7 +6,7 @@ namespace RuculaX.EntityFramework;
 
 public static class ContextModel
 {
-    public static  DbSet<TEntity>? GetModel<TEntity,TType>(this DbContext obj) where TEntity:Identity<TType>
+    public static  DbSet<TEntity>? GetModel<TEntity,TType>(this DbContext obj) where TEntity:Entity<TType>
     {
         Type type = obj.GetType();
 
