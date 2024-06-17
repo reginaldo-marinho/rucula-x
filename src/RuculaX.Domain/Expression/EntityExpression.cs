@@ -15,7 +15,7 @@ public static class EntityExpression
     ///<remarks>
     /// (c=> c.Id == "value")
     ///</remarks>
-    public static Func<T, bool> CreateExpressionDefaultEntity<T,TType>(this T input) where T: Entity<TType>
+    public static Expression<Func<T, bool>> CreateExpressionDefaultEntity<T,TType>(this T input) where T: Entity<TType>
     {
         ParameterExpression param = Expression.Parameter(typeof(T), "c");
 
@@ -26,7 +26,7 @@ public static class EntityExpression
 
         var result =  Expression.Lambda<Func<T, bool>>(body, param);
         
-        return result.Compile();
+        return result;
     }
 
 
@@ -36,7 +36,7 @@ public static class EntityExpression
     ///<remarks>
     /// (c=> c.Id == "value") && (c=> c.Propert == "value2") ...
     ///</remarks>
-    public static Func<T, bool> CreateExpressionEntity<T,TType>(this T input) where T: Entity<TType>
+    public static Expression<Func<T, bool>> CreateExpressionEntity<T,TType>(this T input) where T: Entity<TType>
     {
         List<Expression>  bodys = new ();
 
@@ -59,7 +59,7 @@ public static class EntityExpression
             if(properts.Length == 1)
             {
                 var defaultExpression =  Expression.Lambda<Func<T, bool>>(body, param);
-                return defaultExpression.Compile();
+                return defaultExpression;
             }
 
             bodys.Add(body);
@@ -80,9 +80,8 @@ public static class EntityExpression
 
         var customExpression =  Expression.Lambda<Func<T, bool>>(expression!, param);
         
-        return customExpression.Compile();
+        return customExpression;
     }
-
 
     public static Type GetEntityBase<TType>(object obj)
     {
@@ -90,7 +89,7 @@ public static class EntityExpression
         
         if(type.BaseType?.FullName == typeof(Object).FullName)
         {
-            throw new Exception("Entity Base não existe");
+            throw new EntityBaseException(EntityBaseException.TypeEntityNotExist);
         }
 
         if(type.BaseType?.FullName == typeof(Entity<TType>).FullName){
