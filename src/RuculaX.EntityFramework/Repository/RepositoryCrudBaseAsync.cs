@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Ruculax.Database.Common;
+using Ruculax.Database.Common.Crud;
 using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICommandAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
+public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICrudAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
 {
     private DbSet<TEntity> DbSet;
 

@@ -1,13 +1,13 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Ruculax.Database.Common;
+using RuculaX.Database.Common.Crud;
 using RuculaX.Domain;
 
 
 namespace RuculaX.EntityFramework;
-public class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
-    RepositoryCudBaseAsync<TEntity,TIdentity,TType>,
-    ICommandDtoAsync<TentityDto,TEntity,TIdentity>
+public abstract class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
+    RepositoryCrudBaseAsync<TEntity,TIdentity,TType>,
+    ICrudDtoAsync<TentityDto,TEntity,TIdentity>
         where TEntity : Entity<TType>
         where TentityDto : Entity<TType>
         where TMapper: IRuculaMap<TentityDto, TEntity>
