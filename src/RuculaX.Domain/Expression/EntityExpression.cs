@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 
 namespace RuculaX.Domain;
 
@@ -9,7 +10,7 @@ public static class EntityExpression
 {
 
     ///<summary>
-    /// Creates an expression that searches for an Identity using the Standard Id
+    /// Creates an expression that looks for the Default Id of the Entity<T> base class
     ///</summary>
     ///<remarks>
     /// (c=> c.Id == "value")
@@ -27,4 +28,82 @@ public static class EntityExpression
         
         return result.Compile();
     }
+
+
+    ///<summary>
+    /// Creates an expression that searches for all properties that represent a custom Identity
+    ///</summary>
+    ///<remarks>
+    /// (c=> c.Id == "value") && (c=> c.Propert == "value2") ...
+    ///</remarks>
+    public static Func<T, bool> CreateExpressionEntity<T,TType>(this T input) where T: Entity<TType>
+    {
+        List<Expression>  bodys = new ();
+
+        Type type = GetEntityBase<TType>(input);
+        
+        ParameterExpression param = Expression.Parameter(typeof(T), nameof(input));
+        
+        PropertyInfo[] properts  = type.GetProperties();
+
+        for (int i = 0; i < properts.Length; i++)
+        {
+            PropertyInfo propert  = properts[i];
+
+            Expression left = Expression.Property(param, propert.Name);
+            
+            var value =  propert.GetValue(input);
+            Expression right = Expression.Constant(value);
+            Expression body = Expression.Equal(left, right);
+            
+            if(properts.Length == 1)
+            {
+                var defaultExpression =  Expression.Lambda<Func<T, bool>>(body, param);
+                return defaultExpression.Compile();
+            }
+
+            bodys.Add(body);
+        }
+
+
+        Expression expression = null;
+
+        for (int i = 0; i < bodys.Count; i++)
+        {
+            if(i == 0){
+                expression = bodys[0];
+                continue;
+            } 
+            
+            expression = Expression.And(expression!, bodys[i]);
+        }
+
+        var customExpression =  Expression.Lambda<Func<T, bool>>(expression!, param);
+        
+        return customExpression.Compile();
+    }
+
+
+    public static Type GetEntityBase<TType>(object obj)
+    {
+        Type type= obj.GetType();
+        
+        if(type.BaseType?.FullName == typeof(Object).FullName)
+        {
+            throw new Exception("Entity Base não existe");
+        }
+
+        if(type.BaseType?.FullName == typeof(Entity<TType>).FullName){
+            return type.BaseType;
+        }
+
+        Type CustomEntity = type.BaseType.GetInterface(nameof(ICustomEntity));
+
+        if(CustomEntity is not null){
+            return type.BaseType;
+        }
+
+        return GetEntityBase<TType>(type.BaseType);
+    }
+
 }
