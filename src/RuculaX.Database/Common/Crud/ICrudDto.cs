@@ -7,9 +7,11 @@ namespace RuculaX.Database.Common.Crud
     {
         Task InsertAsync(TEntityDto inputDto);   
         Task AlterAsync(TEntityDto inputDto);   
-        Task AlterAsync(TEntityDto inputDto,TIdentity identity);  
         Task AlterAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
         Task DeleteAsync(TEntityDto inputDto);
-        Task DeleteAsync(TEntityDto inputDto,TIdentity identity);   
+        Task DeleteAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
+        Task<TEntityDto> GetAsync(TEntity input, CancellationToken token);  
+        Task<TEntityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);       
+
     }
 }

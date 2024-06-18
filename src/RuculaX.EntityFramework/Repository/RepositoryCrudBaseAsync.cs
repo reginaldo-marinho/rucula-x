@@ -16,10 +16,9 @@ public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICrudAs
 
     public virtual async Task AlterAsync(TEntity input)
     {
-    }
-
-    public  virtual async Task AlterAsync(TEntity input, TIdentity identity)
-    {
+        var result = await GetAsync(input);
+        var entity = DbSet.Entry(result);
+        entity.CurrentValues.SetValues(input);
     }
 
     public virtual async Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
@@ -29,14 +28,29 @@ public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICrudAs
         entity.CurrentValues.SetValues(input);
     }
 
-    public virtual Task DeleteAsync(TEntity identity)
+    public virtual async Task DeleteAsync(TEntity identity)
     {
-        throw new NotImplementedException();
+        var result = await GetAsync(identity);
+        DbSet.Remove(result);
     }
 
-    public  virtual Task DeleteAsync(TEntity input, TIdentity identity)
+    public async Task DeleteAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
     {
-        throw new NotImplementedException();
+        var result = await DbSet.FindAsync(predicate) ?? throw new RepositoryException(RepositoryException.ModelNotFound);
+        DbSet.Remove(result);
+    }
+
+    public async Task<TEntity> GetAsync(TEntity input, CancellationToken cancellationToken = default)
+    {
+        var expression = input.CreateExpressionDefaultEntity<TEntity,TType>();
+        var result = await DbSet.FirstAsync(expression,cancellationToken);
+        return result;     
+    }
+
+    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        var result = await DbSet.FirstAsync(predicate,cancellationToken);
+        return result;
     }
 
     public async Task InsertAsync(TEntity input)

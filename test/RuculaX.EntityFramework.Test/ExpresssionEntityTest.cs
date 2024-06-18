@@ -27,7 +27,7 @@ public class ExpresssionEntityTest
             Id = "39656e18-3f84-4be0-a5d0-a60c77c3e5b4" 
         };
         
-        var expression = sale.CreateExpressionDefaultEntity<Sale,string>();
+        var expression = sale.CreateExpressionDefaultEntity<Sale,string>().Compile();
 
         var user = sales.FirstOrDefault(expression);
 
@@ -44,7 +44,7 @@ public class ExpresssionEntityTest
             CodeItem = "789"
         };
 
-        var expression = saleDetail.CreateExpressionEntity<SaleDetails,string>();
+        var expression = saleDetail.CreateExpressionEntity<SaleDetails,string>().Compile();
 
         var resultSaleDetail = salesFromRaquel.FirstOrDefault(expression);
 

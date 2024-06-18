@@ -1,5 +1,5 @@
 ﻿namespace RuculaX.EntityFramework;
-public interface IRuculaMap<TFrom, Tto>
+public interface IRuculaMap
 {
-    public Tto MapObjetc(TFrom input);
+    public TTo MapObjetc<TTo,TFrom>(TFrom input);
 }

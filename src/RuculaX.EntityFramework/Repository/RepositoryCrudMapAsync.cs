@@ -10,7 +10,7 @@ public abstract class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType
     ICrudDtoAsync<TentityDto,TEntity,TIdentity>
         where TEntity : Entity<TType>
         where TentityDto : Entity<TType>
-        where TMapper: IRuculaMap<TentityDto, TEntity>
+        where TMapper: IRuculaMap
 {
     private TMapper Mapper;
 
@@ -21,34 +21,49 @@ public abstract class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType
 
     public async  Task AlterAsync(TentityDto inputDto)
     {   
-        var input = this.Mapper.MapObjetc(inputDto);
-        await this.AlterAsync(input);
+        var input = this.Mapper.MapObjetc<TEntity,TentityDto>(inputDto);
+        await base.AlterAsync(input);
     }
-
-    public async Task AlterAsync(TentityDto inputDto, TIdentity identity)
-    {
-        var input = this.Mapper.MapObjetc(inputDto);
-        await this.AlterAsync(input, identity);
-    }
-
+    
     public async Task AlterAsync(TentityDto inputDto, Expression<Func<TEntity, bool>> predicate)
     {
-        var input = this.Mapper.MapObjetc(inputDto);
-        await this.AlterAsync(input, predicate);   
+        var input = this.Mapper.MapObjetc<TEntity,TentityDto>(inputDto);
+        await base.AlterAsync(input, predicate);   
     }
+    
     public async Task DeleteAsync(TentityDto identityDto)
     {
-        var input = this.Mapper.MapObjetc(identityDto);
-        await this.DeleteAsync(input);      
+        var input = this.Mapper.MapObjetc<TEntity,TentityDto>(identityDto);
+        await base.DeleteAsync(input);
     }
 
-    public Task DeleteAsync(TentityDto inputDto, TIdentity identity)
+    public async Task DeleteAsync(TentityDto inputDto, Expression<Func<TEntity, bool>> predicate)
     {
-        throw new NotImplementedException();
+        var input = this.Mapper.MapObjetc<TEntity,TentityDto>(inputDto);
+        await base.DeleteAsync(input, predicate);
+    }
+    
+    public  async Task InsertAsync(TentityDto identityDto)
+    {
+        var input = this.Mapper.MapObjetc<TEntity,TentityDto>(identityDto);
+        await base.InsertAsync(input);   
     }
 
-    public Task InsertAsync(TentityDto input)
+    public async Task<TentityDto> GetAsync(TEntity input, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var result = await base.GetAsync(input, token);
+
+        var resultDto = this.Mapper.MapObjetc<TentityDto,TEntity>(result);
+
+        return resultDto;
+    }
+
+    public async Task<TentityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token)
+    {
+        var result = await base.GetAsync(predicate);
+        
+        var resultDto = this.Mapper.MapObjetc<TentityDto,TEntity>(result);
+
+        return resultDto;
     }
 }

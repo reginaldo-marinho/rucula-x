@@ -6,8 +6,9 @@ public interface ICrudAsync<TEntity,TIdentity>
 {
     Task InsertAsync(TEntity input);   
     Task AlterAsync(TEntity input);   
-    Task AlterAsync(TEntity input,TIdentity identity);  
     Task AlterAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
     Task DeleteAsync(TEntity input);
-    Task DeleteAsync(TEntity input,TIdentity identity);   
+    Task DeleteAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
+    Task<TEntity> GetAsync(TEntity input, CancellationToken token);  
+    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);       
 }
