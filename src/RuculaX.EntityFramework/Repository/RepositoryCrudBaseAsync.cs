@@ -5,7 +5,7 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public abstract class RepositoryCrudBaseAsync<TEntity,TIdentity,TType> : ICrudAsync<TEntity,TIdentity> where TEntity : Entity<TType>                                                                                                                                                              
+public abstract class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where TEntity : Entity<TType>                                                                                                                                                              
 {
     private DbSet<TEntity> DbSet;
 

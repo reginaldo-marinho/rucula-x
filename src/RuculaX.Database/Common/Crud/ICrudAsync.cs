@@ -2,7 +2,7 @@
 
 namespace Ruculax.Database.Common.Crud;
 
-public interface ICrudAsync<TEntity,TIdentity>
+public interface ICrudAsync<TEntity>
 {
     Task InsertAsync(TEntity input);   
     Task AlterAsync(TEntity input);   

@@ -6,7 +6,7 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 public abstract class RepositoryCudMApAsync<TEntity, TentityDto,TIdentity, TType, TMapper> : 
-    RepositoryCrudBaseAsync<TEntity,TIdentity,TType>,
+    RepositoryCrudBaseAsync<TEntity,TType>,
     ICrudDtoAsync<TentityDto,TEntity,TIdentity>
         where TEntity : Entity<TType>
         where TentityDto : Entity<TType>
