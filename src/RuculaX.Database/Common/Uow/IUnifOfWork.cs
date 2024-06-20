@@ -1,13 +1,13 @@
 ﻿namespace Ruculax.Database.Common;
 
-public interface IUnifOfWork<T> : IDisposable
+public interface IUnifOfWork : IDisposable
 {
     public void Begin();
     public void Commit();
     public void Rollback();
 }
 
-public interface IUnifOfWorkAsync<T> : IDisposable
+public interface IUnifOfWorkAsync : IDisposable
 {
     public Task BeginAsync();
     public Task CommitAsync();
