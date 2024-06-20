@@ -5,7 +5,7 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public abstract class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where TEntity : Entity<TType>                                                                                                                                                              
+public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where TEntity : Entity<TType>                                                                                                                                                              
 {
     private DbSet<TEntity> DbSet;
 
@@ -23,20 +23,20 @@ public abstract class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntit
 
     public virtual async Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
     {
-        var result = await DbSet.FindAsync(predicate) ?? throw new RepositoryException(RepositoryException.ModelNotFound);
+        var result = await GetAsync(input);
         var entity = DbSet.Entry(result);
         entity.CurrentValues.SetValues(input);
     }
 
-    public virtual async Task DeleteAsync(TEntity identity)
+    public virtual async Task DeleteAsync(TEntity input)
     {
-        var result = await GetAsync(identity);
+        var result = await GetAsync(input);
         DbSet.Remove(result);
     }
 
     public async Task DeleteAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
     {
-        var result = await DbSet.FindAsync(predicate) ?? throw new RepositoryException(RepositoryException.ModelNotFound);
+        var result = await DbSet.FirstAsync(predicate);
         DbSet.Remove(result);
     }
 
