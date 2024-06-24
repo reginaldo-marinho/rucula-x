@@ -7,7 +7,7 @@ public class UnifOfWorkTest
 {
 
     [TestMethod]
-    public async Task Test()
+    public async Task ExecCommandAsync()
     {
 
         var ctx = DbInMemory.GetContext();
