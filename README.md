@@ -11,3 +11,5 @@ Por Exemplo, em modelo de dominio é comum trabalharmos com entidades que herdam
 - [Identidade Única]()
 - [Repositório Genérico]()
 - [Repositório Genérico Concreto]()
+- [Repositório Genérico Concreto de Mapeamento de Acesso a Dados ]()
+- [Unidade Lógica de Trabalho]()
