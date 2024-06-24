@@ -18,3 +18,9 @@ public class UserDetails : UserDetailsEntity
 {
     public string? Description { get; set; }
 }
+
+
+public class UserDTo : Entity<string>, IEntityDto
+{
+    public string? Name { get; set; }    
+}

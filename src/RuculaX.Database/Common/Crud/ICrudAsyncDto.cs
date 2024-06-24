@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace RuculaX.Database.Common.Crud
 {
-   public interface ICrudDtoAsync<TEntityDto, TEntity, TIdentity>
+   public interface ICrudDtoAsync<TEntityDto, TEntity>
     {
         Task InsertAsync(TEntityDto inputDto);   
         Task AlterAsync(TEntityDto inputDto);   

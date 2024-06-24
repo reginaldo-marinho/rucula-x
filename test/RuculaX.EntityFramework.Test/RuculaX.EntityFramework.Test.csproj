@@ -27,4 +27,8 @@
     <ProjectReference Include="..\..\src\RuculaX.EntityFramework\RuculaX.EntityFramework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RepositoryMapperTest/" />
+  </ItemGroup>
+
 </Project>
