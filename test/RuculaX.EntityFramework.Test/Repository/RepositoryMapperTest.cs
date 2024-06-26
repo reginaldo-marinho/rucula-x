@@ -1,4 +1,4 @@
-﻿namespace RuculaX.EntityFramework.Test;
+﻿namespace RuculaX.EntityFramework.Test.Repository;
 
 [TestClass]
 public class RepositoryMapperTest
@@ -12,11 +12,10 @@ public class RepositoryMapperTest
         ctx = DbInMemory.GetContext();
         
         repositoryMapUserDetail = new MapperCrudRepository(new RepositoryCrudBaseAsync<User,string>(ctx));
-    
     }
 
     [TestMethod]
-    public async void InsertAsync()
+    public async Task InsertAsync()
     {
         var userDto = new UserDTo 
         {
