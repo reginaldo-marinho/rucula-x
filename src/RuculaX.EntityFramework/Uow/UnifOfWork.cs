@@ -3,19 +3,19 @@ using Ruculax.Database.Common;
 
 namespace RuculaX.EntityFramework;
 
-sealed public class UnitOfWorkAsync: IUnifOfWorkAsync 
+sealed public class UnitOfWorkAsync : IUnifOfWorkAsync 
 {
     public UnitOfWorkAsync(DbContext context)
     {
-        Context = context;
+        _context = context;
     }
+    private DbContext _context;
 
-    private DbContext Context;
 
-    public async Task BeginAsync() =>  await Context.Database.BeginTransactionAsync();
-    public async Task CommitAsync()  =>  await Context.Database.CommitTransactionAsync();
-    public async Task RollbackAsync() => await  Context.Database.RollbackTransactionAsync();
-
+    public async Task BeginAsync() =>  await _context.Database.BeginTransactionAsync();
+    public async Task CommitAsync()  =>  await _context.Database.CommitTransactionAsync();
+    public async Task RollbackAsync() => await  _context.Database.RollbackTransactionAsync();
+    public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
     private bool _disposed;
 
     public void Dispose(bool disposing)
@@ -24,7 +24,7 @@ sealed public class UnitOfWorkAsync: IUnifOfWorkAsync
         {
             if (disposing)
             {
-                Context.Dispose();
+                _context.Dispose();
             }
         }
 

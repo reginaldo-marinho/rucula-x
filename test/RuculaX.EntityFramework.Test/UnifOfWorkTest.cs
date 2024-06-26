@@ -23,15 +23,15 @@ public class UnifOfWorkTest
                 Id = "cwocwpcwpowcjowc",
                 Name = "Reginaldo",
         });
-        ctx.SaveChanges();
+        await uow.SaveChangesAsync();
 
         await userDetail.InsertAsync(new UserDetails {
                 Id = "cwocwpcwpowcjowc",
                 RowNumber = 22,
                 Description = "Test"
         });
-        ctx.SaveChanges();
-
+        
+        await uow.SaveChangesAsync();
         
         await uow.CommitAsync();
 
