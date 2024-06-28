@@ -3,6 +3,11 @@ using System.Linq.Expressions;
 
 namespace RuculaX.Database.Common.Crud
 {
+    /// <summary>
+    /// Contract for a CRUD repository for Dto
+    /// </summary>
+    /// <typeparam name="TEntityDto"></typeparam>
+    /// <typeparam name="TEntity"></typeparam>
    public interface ICrudDtoAsync<TEntityDto, TEntity>
     {
         Task InsertAsync(TEntityDto inputDto);   

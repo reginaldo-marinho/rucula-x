@@ -1,7 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 namespace Ruculax.Database.Common.Crud;
-
+/// <summary>
+/// Contract for a CRUD repository for a Single Entity
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
 public interface ICrudAsync<TEntity>
 {
     Task InsertAsync(TEntity input);   
