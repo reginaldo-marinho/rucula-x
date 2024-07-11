@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuculaX.Domain", "src\Rucul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruculax.Database", "src\RuculaX.Database\Ruculax.Database.csproj", "{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruculax.Database.Test", "test\Ruculax.Database.Test\Ruculax.Database.Test.csproj", "{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,5 +52,6 @@ Global
 		{C0F1B657-FD8D-4DD5-AC8F-15C936A70356} = {D11612EF-F39B-4E2F-8559-D8BA941513FF}
 		{BCDE3AC0-113D-4BF6-9CEF-2492A45E0E30} = {B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}
 		{F756E1BD-FFC7-4153-9A52-243D86EFB8A0} = {B4F1F714-E52B-45F0-8E49-0A9660B8A4BF}
+		{FCAC6050-7754-49D9-AAAA-0BEED1C2EA3E} = {D11612EF-F39B-4E2F-8559-D8BA941513FF}
 	EndGlobalSection
 EndGlobal
