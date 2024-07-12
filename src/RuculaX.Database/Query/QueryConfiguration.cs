@@ -1,15 +1,15 @@
 ﻿namespace RuculaX.Database;
 
-public interface IQueryConfigurationInput
+public interface IQueryConfiguration
 {
-    /// <summary>
-    /// Pagination Component Query 
-    /// </summary>
     string Name { get;set; }
     string Options { get; set; }
-    bool Next { get;set; }
     int RowNumber { get;set; }
+}
 
+public interface IQueryConfigurationInput : IQueryConfiguration
+{
+    bool Next { get;set; }
 }
 
 public sealed class QueryConfigurationInput : IQueryConfigurationInput
@@ -20,13 +20,10 @@ public sealed class QueryConfigurationInput : IQueryConfigurationInput
     public bool Next { get;set; } = true;
 }
 
-public interface IQueryConfigurationOutput
+public interface IQueryConfigurationOutput : IQueryConfiguration
 {
-    string Name { get;set; }
     string Description { get;set; }
-    string Options { get; set; }
     string Data { get; set;}
-    int RowNumber { get;set; }
 }
 
 public class QueryConfigurationOutput : IQueryConfigurationOutput
