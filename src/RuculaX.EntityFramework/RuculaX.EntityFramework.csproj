@@ -13,6 +13,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>RuculaX.EntityFramework</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>Reginaldo Marinho</Authors>
+    <Company>RuculaX</Company>
+    <Product>Rucula Entity Framework</Product>
   </PropertyGroup>
-
 </Project>
