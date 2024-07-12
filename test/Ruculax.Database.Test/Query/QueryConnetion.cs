@@ -1,6 +1,6 @@
 ﻿namespace Ruculax.Database.Test;
 
-public class QueryTestConnetion
+public class QueryConnetion
 {
     public List<User> Users = [
         new User {Id = 1, Name = "Reginaldo"},

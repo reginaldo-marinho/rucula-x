@@ -5,8 +5,8 @@ namespace Ruculax.Database.Test;
 
 public class UserQuery : IQuery
 {
-    QueryTestConnetion _connetion;
-    public UserQuery(QueryTestConnetion connetion)
+    QueryConnetion _connetion;
+    public UserQuery(QueryConnetion connetion)
     {
         _connetion = connetion;
     }
@@ -22,7 +22,9 @@ public class UserQuery : IQuery
                 from user in _connetion.Users
                 where user.Id > optionsInput?.LastId
                 orderby user.Id ascending
-                select user).Take(3).ToList();
+                select user)
+            .Take(config.RowNumber)
+            .ToList();
         }
 
         if(config.Next is false)
@@ -31,7 +33,11 @@ public class UserQuery : IQuery
                 from user in _connetion.Users
                 where user.Id <= optionsInput?.LastId
                 orderby user.Id descending 
-                select user).Take(3).ToList();
+                select user)
+                
+            .Take(config.RowNumber)
+            .OrderBy(user => user.Id)
+            .ToList();
         }
 
         var lastUser = users?.Last();

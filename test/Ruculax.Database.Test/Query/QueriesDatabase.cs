@@ -2,9 +2,9 @@
 
 namespace Ruculax.Database.Test;
 
-public class QueriesDatabaseTest : Queries
+public class QueriesDatabase : Queries
 {
-    public QueriesDatabaseTest()
+    public QueriesDatabase()
     {
         Set(nameof(User), typeof(UserQuery));
     }
