@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace RuculaX.Database;
+namespace RuculaX.Database.Query;
 
 /// <summary>
 /// Create IQuery instances

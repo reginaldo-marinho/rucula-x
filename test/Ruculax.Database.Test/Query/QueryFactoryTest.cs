@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using RuculaX.Database;
+using RuculaX.Database.Query;
 
 namespace Ruculax.Database.Test;
 
@@ -7,7 +7,7 @@ namespace Ruculax.Database.Test;
 public class QueryFactoryTest
 {
     [TestMethod]
-    public async Task GetQueryPagedTwo_wayNextAndPrevious()
+    public async Task GetQueryPagedTwo_wayNextAndPreviousAsync()
     {
         var queries = new QueriesDatabase();
         var connection = new QueryConnetion();
@@ -16,6 +16,7 @@ public class QueryFactoryTest
         var userPageOne = new QueryConfigurationInput()
         {
             Name = nameof(User),
+            Page = (byte)OptionPagination.Next, 
             RowNumber = 2,
             Options = "{\"LastId\": 0}"
         };
@@ -33,6 +34,7 @@ public class QueryFactoryTest
         var userPageTwo = new QueryConfigurationInput()
         {
             Name = nameof(User),
+            Page = (byte)OptionPagination.Next, 
             RowNumber = 2,
             Options = JsonSerializer.Serialize(userOptions)
         };
@@ -48,7 +50,8 @@ public class QueryFactoryTest
         {
             Name = nameof(User),
             Options = JsonSerializer.Serialize(userOptions),
-            Next = false
+            Page = (byte)OptionPagination.Previous, 
+            
         };
 
         var pagePrevious = await factoryQuery.QueryAsync(userPagePreviousOne);
@@ -58,5 +61,48 @@ public class QueryFactoryTest
         Assert.AreEqual(usersPagePrevious[1].Name, "Luis");
 
     }
+
+    [TestMethod]
+    public async Task GetQueryPagedFirstAsync()
+    {
+        var queries = new QueriesDatabase();
+        var connection = new QueryConnetion();
+        var factoryQuery = new FactoryQuery<QueryConnetion>(connection,queries);
+        
+        var userPageOne = new QueryConfigurationInput()
+        {
+            Name = nameof(User),
+            Page = (byte)OptionPagination.First, 
+            RowNumber = 2
+        };
+
+        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+
+        Assert.AreEqual(usersPageOne[0].Name, "Reginaldo");
+        Assert.AreEqual(usersPageOne[1].Name, "Luis");
+    }
+    
+    [TestMethod]
+    public async Task GetQueryPagedLastAsync()
+    {
+        var queries = new QueriesDatabase();
+        var connection = new QueryConnetion();
+        var factoryQuery = new FactoryQuery<QueryConnetion>(connection,queries);
+        
+        var userPageOne = new QueryConfigurationInput()
+        {
+            Name = nameof(User),
+            Page = (byte)OptionPagination.Last, 
+            RowNumber = 2
+        };
+
+        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+
+        Assert.AreEqual(usersPageOne[0].Name, "Ronald");
+        Assert.AreEqual(usersPageOne[1].Name, "Raquel");
+    }
+
 
 }

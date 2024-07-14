@@ -1,4 +1,4 @@
-﻿namespace RuculaX.Database;
+﻿namespace RuculaX.Database.Query;
 
 public interface IQueryConfiguration
 {
@@ -9,15 +9,15 @@ public interface IQueryConfiguration
 
 public interface IQueryConfigurationInput : IQueryConfiguration
 {
-    bool Next { get;set; }
+    byte Page { get;set; }
 }
 
 public sealed class QueryConfigurationInput : IQueryConfigurationInput
 {
     public string Name { get;set; }
     public int RowNumber { get;set; } = 50;
-    public string Options { get; set; }
-    public bool Next { get;set; } = true;
+    public string Options { get; set; } = "{}";
+    public byte Page { get;set; } = 3;
 }
 
 public interface IQueryConfigurationOutput : IQueryConfiguration

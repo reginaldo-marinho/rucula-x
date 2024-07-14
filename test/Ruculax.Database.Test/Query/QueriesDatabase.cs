@@ -1,4 +1,4 @@
-﻿using RuculaX.Database;
+﻿using RuculaX.Database.Query;
 
 namespace Ruculax.Database.Test;
 

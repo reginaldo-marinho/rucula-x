@@ -1,4 +1,4 @@
-﻿namespace RuculaX.Database;
+﻿namespace RuculaX.Database.Query;
 
 public interface IQuery
 {
