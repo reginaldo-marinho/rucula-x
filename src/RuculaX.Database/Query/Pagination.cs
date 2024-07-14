@@ -1,13 +1,30 @@
 namespace RuculaX.Database.Query
 {
+    /// <summary>
+    /// Options of Pagination
+    /// </summary>
     public enum OptionPagination
     {
+        /// <summary>
+        /// First Page
+        /// </summary>
         First,
+        /// <summary>
+        /// Previous Page
+        /// </summary>
         Previous,
+         /// <summary>
+        /// Next Page
+        /// </summary>
         Next, 
+        /// <summary>
+        /// Last Page
+        /// </summary>
         Last  
     }
-    
+    /// <summary>
+    /// Provides methods for implements logic for optios of Page
+    /// </summary>    
     public abstract class PaginationAsync
     {
         protected abstract Task<IQueryConfigurationOutput> FirstAsync(IQueryConfigurationInput config);
