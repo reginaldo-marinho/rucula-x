@@ -20,8 +20,13 @@ namespace RuculaX.Database.Query
         /// <summary>
         /// Last Page
         /// </summary>
-        Last  
+        Last,
+        /// <summary>
+        /// Contains text
+        /// </summary>
+        Contain 
     }
+    
     /// <summary>
     /// Provides methods for implements logic for optios of Page
     /// </summary>    
@@ -31,6 +36,7 @@ namespace RuculaX.Database.Query
         protected abstract Task<IQueryConfigurationOutput> LastAsync(IQueryConfigurationInput config);
         protected abstract Task<IQueryConfigurationOutput> NextAsync(IQueryConfigurationInput config);
         protected abstract Task<IQueryConfigurationOutput> PreviousAsync(IQueryConfigurationInput config);
+        protected abstract Task<IQueryConfigurationOutput> ContainAsync(IQueryConfigurationInput config);
 
         public async Task<IQueryConfigurationOutput> QueryAsync(byte option, IQueryConfigurationInput config)
         {
@@ -38,6 +44,7 @@ namespace RuculaX.Database.Query
             if(option == (byte)OptionPagination.Next) return  await NextAsync(config);
             if(option == (byte)OptionPagination.Previous) return await PreviousAsync(config);
             if(option == (byte)OptionPagination.Last) return await LastAsync(config);
+            if(option == (byte)OptionPagination.Contain) return await ContainAsync(config);
 
             throw new PaginationException(PaginationException.OptionPagination);
         }

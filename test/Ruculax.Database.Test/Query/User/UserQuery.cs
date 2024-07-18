@@ -129,4 +129,32 @@ public class UserQuery : PaginationAsync, IQuery
 
         return output;
     }
+
+    protected async override Task<IQueryConfigurationOutput> ContainAsync(IQueryConfigurationInput config)
+    {
+        var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
+
+        var users = await Task.Run(() => (
+            from user in _connetion.Users
+            where user.Name.Contains(config.Text)
+            orderby user.Id ascending
+            select user)
+            .Take(config.RowNumber)
+            .ToList());
+
+        var lastUser = users?.Last();
+        
+        var optionsOutput = new UserQueryOptions(lastUser.Id);
+
+        var output = new QueryConfigurationOutput()
+        {
+            Name = nameof(User),
+            Description = "Teste de paginação para usuários",
+            Options = JsonSerializer.Serialize(optionsOutput),
+            Data = JsonSerializer.Serialize(users)
+        };
+
+        return output;
+    }
+
 }

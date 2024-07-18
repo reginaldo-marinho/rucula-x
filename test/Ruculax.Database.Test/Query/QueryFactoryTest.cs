@@ -105,4 +105,27 @@ public class QueryFactoryTest
     }
 
 
+    [TestMethod]
+    public async Task ContainAsync()
+    {
+        var queries = new QueriesDatabase();
+        var connection = new QueryConnetion();
+        var factoryQuery = new FactoryQuery<QueryConnetion>(connection,queries);
+        
+        var userPageOne = new QueryConfigurationInput()
+        {
+            Name = nameof(User),
+            Page = (byte)OptionPagination.Contain, 
+            RowNumber = 2,
+            Text = "ald" 
+        };
+
+        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+
+        Assert.AreEqual(usersPageOne[0].Name, "Reginaldo");
+        Assert.AreEqual(usersPageOne[1].Name, "Ronald");
+    }
+
+
 }
