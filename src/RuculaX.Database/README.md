@@ -130,6 +130,34 @@ var userPageOne = new QueryConfigurationInput()
 ```
 > Notem que a representação `string` equivale ao objeto do tipo `UserQueryOptions`
 
+#### Adicione o Serviço
+```C#
+builder.Services.AddSingleton<IQueries,RuculaUpQueries>();
+builder.Services.AddScoped<FactoryQuery<ApplicationContext>>();
+
+```
+
+
+#### Consumindo a Querie
+
+```C#
+[ApiController]
+[Route("[controller]")]
+public class QueryController : ControllerBase
+{
+    private readonly FactoryQuery<ApplicationContext> _query;
+    public QueryController(FactoryQuery<ApplicationContext> query)
+    {
+        _query = query;
+    }
+
+    [HttpPost]
+    public Task<IQueryConfigurationOutput> Post(QueryConfigurationInput configuration)
+    {
+        return _query.QueryAsync(configuration);
+    }
+}
+```
 
 ## WhereIf
 Esse método estático ajuda na leitura condicional criadas nas nossas **Queries**.
