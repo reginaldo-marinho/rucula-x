@@ -7,7 +7,7 @@ namespace RuculaX.EntityFramework;
 
 public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where TEntity : Entity<TType>                                                                                                                                                              
 {
-    private DbSet<TEntity> DbSet;
+    public DbSet<TEntity> DbSet;
 
     public  RepositoryCrudBaseAsync(DbContext context)
     {
@@ -40,16 +40,18 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where 
         DbSet.Remove(result);
     }
 
-    public async Task<TEntity> GetAsync(TEntity input, CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null,  CancellationToken cancellationToken = default)
     {
+        dbSetConfigured ??= DbSet;
         var expression = input.CreateExpressionDefaultEntity<TEntity,TType>();
-        var result = await DbSet.FirstAsync(expression,cancellationToken);
+        var result = await dbSetConfigured.FirstAsync(expression,cancellationToken);
         return result;     
     }
 
-    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken cancellationToken = default)
     {
-        var result = await DbSet.FirstAsync(predicate,cancellationToken);
+        dbSetConfigured ??= DbSet;
+        var result = await dbSetConfigured.FirstAsync(predicate,cancellationToken);
         return result;
     }
 

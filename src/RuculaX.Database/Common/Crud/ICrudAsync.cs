@@ -12,6 +12,6 @@ public interface ICrudAsync<TEntity>
     Task AlterAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
     Task DeleteAsync(TEntity input);
     Task DeleteAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
-    Task<TEntity> GetAsync(TEntity input, CancellationToken token);  
-    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);       
+    Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);  
+    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);       
 }

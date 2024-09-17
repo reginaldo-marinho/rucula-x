@@ -18,8 +18,8 @@ public abstract class  RepositoryCrudMApAsync<TEntity, TentityDto, TType> : ICru
     public abstract Task AlterAsync(TentityDto inputDto, Expression<Func<TEntity, bool>> predicate);
     public abstract Task DeleteAsync(TentityDto identityDto);
     public abstract Task DeleteAsync(TentityDto inputDto, Expression<Func<TEntity, bool>> predicate);
-    public abstract Task<TentityDto> GetAsync(TEntity input, CancellationToken token);
-    public abstract Task<TentityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);
+    public abstract Task<TentityDto> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);
+    public abstract Task<TentityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);
 }
 
 

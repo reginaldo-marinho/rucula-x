@@ -15,8 +15,8 @@ namespace RuculaX.Database.Common.Crud
         Task AlterAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
         Task DeleteAsync(TEntityDto inputDto);
         Task DeleteAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
-        Task<TEntityDto> GetAsync(TEntity input, CancellationToken token);  
-        Task<TEntityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);       
+        Task<TEntityDto> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null,CancellationToken token = default);  
+        Task<TEntityDto> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null,CancellationToken token = default);       
 
     }
 }
