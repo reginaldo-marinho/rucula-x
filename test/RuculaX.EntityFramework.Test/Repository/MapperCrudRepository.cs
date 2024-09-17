@@ -45,18 +45,18 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
         await Repository.AlterAsync(user,predicate);    
     }
 
-    public override async Task<UserDTo> GetAsync(User input, IQueryable<User> dbSetConfigured = null, CancellationToken token = default)
+    public override async Task<UserDTo> GetAsync(User input, CancellationToken token = default)
     {
-        var result = await Repository.GetAsync(input, dbSetConfigured,  token); 
+        var result = await Repository.GetAsync(input, null,  token); 
         return new UserDTo
         {
             Id = result.Id
         };
     }
 
-    public override async Task<UserDTo> GetAsync(Expression<Func<User, bool>> predicate, IQueryable<User> dbSetConfigured = null, CancellationToken token = default)
+    public override async Task<UserDTo> GetAsync(Expression<Func<User, bool>> predicate, CancellationToken token = default)
     {
-        var result = await Repository.GetAsync(predicate, dbSetConfigured, token); 
+        var result = await Repository.GetAsync(predicate, null, token); 
         return new UserDTo
         {
             Id = result.Id
