@@ -17,15 +17,13 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where 
     public virtual async Task AlterAsync(TEntity input)
     {
         var result = await GetAsync(input);
-        var entity = DbSet.Entry(result);
-        entity.CurrentValues.SetValues(input);
+        DbSet.Entry(result).State = EntityState.Detached;
+        DbSet.Entry(input).State = EntityState.Modified;
     }
 
     public virtual async Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
     {
-        var result = await GetAsync(input);
-        var entity = DbSet.Entry(result);
-        entity.CurrentValues.SetValues(input);
+        throw new NotImplementedException("AlterAsync not Implemented");
     }
 
     public virtual async Task DeleteAsync(TEntity input)

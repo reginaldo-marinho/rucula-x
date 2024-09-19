@@ -46,15 +46,22 @@ public class CrudRepositoryEntityDefaultTest
     {
         const string userIDLucasMarinho = "2351r545234t5423dv";
 
-        await repositoryUser.InsertAsync(new User { Id = userIDLucasMarinho, Name = "Lucas"});
+        await repositoryUser.InsertAsync(new User { Id = userIDLucasMarinho, Name = "Lucas", Addreass = new Addreass {
+             Id = userIDLucasMarinho,
+             CEP = ""
+        }});
 
         await ctx.SaveChangesAsync();
 
-        await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho, Name = "Lucas Marinho"});
+        await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho, Name = "Lucas Marinho", Addreass = new Addreass {
+             Id = userIDLucasMarinho,
+             CEP = "132333453"
+        }});
 
         var user = await repositoryUser.GetAsync(new User { Id = userIDLucasMarinho});
 
         Assert.AreEqual(user.Name,"Lucas Marinho");
+        Assert.AreEqual(user.Addreass.CEP,"132333453");
     }
 
     [TestMethod]
