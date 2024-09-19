@@ -80,8 +80,6 @@ public class CrudRepositoryEntityDefaultTest
         await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await repositoryUser.GetAsync(new User { Id = userIDJorge}));
 
     }
-
-
 }
 
 public class RepositoryUser : RepositoryCrudBaseAsync<User, string>
