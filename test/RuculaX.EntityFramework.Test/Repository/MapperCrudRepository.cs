@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using RuculaX.Database.Common.Crud;
 
 namespace RuculaX.EntityFramework.Test;
 
@@ -7,14 +8,14 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
     public MapperCrudRepository(RepositoryCrudBaseAsync<User, string> repository) : base(repository)
     {
     }
-    public override async Task AlterAsync(UserDTo inputDto)
+    public override async Task AlterAsync(UserDTo inputDto, IAlterMap<User> map)
     {
         User user = new()
         {
             Id = inputDto.Id
         };
 
-        await this.Repository.AlterAsync(user);
+        await this.Repository.AlterAsync(user, map);
     }
 
     public override async Task AlterAsync(UserDTo inputDto, Expression<Func<User, bool>> predicate)
@@ -23,7 +24,7 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
         {
             Id = inputDto.Id
         };
-        await Repository.AlterAsync(user);
+        await Repository.AlterAsync(user,predicate);
     }
 
     public async override Task DeleteAsync(UserDTo inputDto)
@@ -33,7 +34,7 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
             Id = inputDto.Id
         };
 
-        await Repository.AlterAsync(user);
+        await Repository.DeleteAsync(user);
     }
 
     public override async Task DeleteAsync(UserDTo inputDto, Expression<Func<User, bool>> predicate)

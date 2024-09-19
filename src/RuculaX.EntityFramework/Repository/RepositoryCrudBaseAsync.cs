@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Ruculax.Database.Common.Crud;
+using RuculaX.Database.Common.Crud;
 using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
@@ -14,11 +15,21 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where 
         DbSet = context.GetModel<TEntity,TType>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound); 
     }
 
-    public virtual async Task AlterAsync(TEntity input)
+    public virtual async Task AlterAsync(TEntity input, IAlterMap<TEntity> map)
     {
         var result = await GetAsync(input);
-        DbSet.Entry(result).State = EntityState.Detached;
-        DbSet.Entry(input).State = EntityState.Modified;
+        var resultMap =  map.Map(result);
+        
+        var hashResult =  result.GetHashCode();
+        var hashMap =  resultMap.GetHashCode();
+        
+        if( hashResult != hashMap)
+        {
+            var message = string.Format(RepositoryException.ObjectHashNotEqualInMap,hashMap,hashResult);
+            throw new RepositoryException(message);
+        }
+
+        this.DbSet.Update(resultMap);
     }
 
     public virtual async Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)

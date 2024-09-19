@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RuculaX.Database.Common.Crud;
 
 namespace RuculaX.EntityFramework.Test;
 
@@ -53,10 +54,7 @@ public class CrudRepositoryEntityDefaultTest
 
         await ctx.SaveChangesAsync();
 
-        await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho, Name = "Lucas Marinho", Addreass = new Addreass {
-             Id = userIDLucasMarinho,
-             CEP = "132333453"
-        }});
+        await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho}, new MapUserInAlter());
 
         var user = await repositoryUser.GetAsync(new User { Id = userIDLucasMarinho});
 
@@ -82,12 +80,33 @@ public class CrudRepositoryEntityDefaultTest
         await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await repositoryUser.GetAsync(new User { Id = userIDJorge}));
 
     }
-}
 
+
+}
 
 public class RepositoryUser : RepositoryCrudBaseAsync<User, string>
 {
     public RepositoryUser(DbContext context) : base(context)
     {
     }
+}
+
+public class MapUserInAlter : IAlterMap<User>
+{
+  public User Map(User entity)
+  {
+        const string userIDLucasMarinho = "2351r545234t5423dv";
+
+        var user =  new User { Id = userIDLucasMarinho, Name = "Lucas Marinho", Addreass = new Addreass {
+            Id = userIDLucasMarinho,
+            CEP = "132333453"
+        }};
+
+        entity.Id = user.Id;
+        entity.Name = user.Name;
+        entity.Addreass.Id = user.Addreass.Id;
+        entity.Addreass.CEP = user.Addreass.CEP;
+
+        return entity;
+  }
 }

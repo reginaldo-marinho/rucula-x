@@ -1,4 +1,6 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection.Metadata;
+using RuculaX.Database.Common.Crud;
 
 namespace Ruculax.Database.Common.Crud;
 /// <summary>
@@ -8,7 +10,7 @@ namespace Ruculax.Database.Common.Crud;
 public interface ICrudAsync<TEntity>
 {
     Task InsertAsync(TEntity input);   
-    Task AlterAsync(TEntity input);   
+    Task AlterAsync(TEntity input, IAlterMap<TEntity> map);   
     Task AlterAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
     Task DeleteAsync(TEntity input);
     Task DeleteAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  

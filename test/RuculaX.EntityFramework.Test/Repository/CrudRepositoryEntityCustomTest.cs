@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RuculaX.Database.Common.Crud;
 
 namespace RuculaX.EntityFramework.Test;
 
@@ -39,13 +40,9 @@ public class CrudRepositoryEntityCustomTest
 
         await ctx.SaveChangesAsync();
 
-        var userDetailsEdit = new UserDetails {
-            Id = userDetails.Id,
-            RowNumber =  userDetails.RowNumber,
-            Description = "Second Info"
-        };
-
-        await repositoryUserDetail.AlterAsync(userDetailsEdit);
+        var userDetailsEdit = new UserDetails { Id = "3442234344", RowNumber =  1};
+       
+        await repositoryUserDetail.AlterAsync(userDetailsEdit, new MapUserDetailsInAlter());
 
         var userDetails1 = await repositoryUserDetail.GetAsync(userDetailsEdit);
 
@@ -60,3 +57,20 @@ public class RepositoryUserDetail : RepositoryCrudBaseAsync<UserDetails, string>
     }
 }
 
+public sealed class MapUserDetailsInAlter : IAlterMap<UserDetails>
+{
+    public UserDetails Map(UserDetails entity)
+    {
+        var userDetailsEdit = new UserDetails {
+            Id = "3442234344",
+            RowNumber =  1,
+            Description = "Second Info"
+        };
+
+        entity.Id = userDetailsEdit.Id;
+        entity.RowNumber = userDetailsEdit.RowNumber;
+        entity.Description = userDetailsEdit.Description;
+
+        return entity;
+    }
+}
