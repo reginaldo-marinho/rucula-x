@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
-using System.Reflection.Metadata;
-using RuculaX.Database.Common.Crud;
 
-namespace Ruculax.Database.Common.Crud;
+namespace RuculaX.Database.Common.Crud;
 /// <summary>
 /// Contract for a CRUD repository for a Single Entity
 /// </summary>

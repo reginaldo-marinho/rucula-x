@@ -1,7 +1,6 @@
-namespace RuculaX.Database.Common.Crud
+namespace RuculaX.Database.Common.Crud;
+
+public interface IAlterMap<TEntity>
 {
-    public interface IAlterMap<TEntity>
-    {
-        public TEntity Map(TEntity entity);
-    }
+    public TEntity Map(TEntity entity);
 }

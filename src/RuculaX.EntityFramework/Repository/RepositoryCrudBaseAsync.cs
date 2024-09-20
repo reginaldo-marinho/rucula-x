@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Ruculax.Database.Common.Crud;
 using RuculaX.Database.Common.Crud;
 using RuculaX.Domain;
 
