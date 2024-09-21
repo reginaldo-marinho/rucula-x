@@ -11,7 +11,7 @@ namespace RuculaX.Database.Common.Crud
    public interface ICrudDtoAsync<TEntityDto, TEntity>
     {
         Task InsertAsync(TEntityDto inputDto);   
-        Task AlterAsync(TEntityDto inputDto, IAlterMap<TEntity> map);   
+        Task AlterAsync(TEntityDto inputDto);   
         Task AlterAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
         Task DeleteAsync(TEntityDto inputDto);
         Task DeleteAsync(TEntityDto inputDto,Expression<Func<TEntity, bool>> predicate);  
