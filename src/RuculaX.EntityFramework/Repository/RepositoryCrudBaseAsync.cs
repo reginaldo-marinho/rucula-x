@@ -5,7 +5,7 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where TEntity : Entity<TType>                                                                                                                                                              
+public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlterMapAdpter<TEntity> where TEntity : Entity<TType> 
 {
     public DbSet<TEntity> DbSet;
 
@@ -28,7 +28,7 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where 
             throw new RepositoryException(message);
         }
 
-        this.DbSet.Update(resultMap);
+        await AlterAsync(resultMap);
     }
 
     public virtual async Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate)
@@ -36,7 +36,12 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity> where 
         throw new NotImplementedException("AlterAsync not Implemented");
     }
 
-    public virtual async Task DeleteAsync(TEntity input)
+    public async Task AlterAsync(TEntity input)
+    {
+        this.DbSet.Update(input);
+    }
+
+  public virtual async Task DeleteAsync(TEntity input)
     {
         var result = await GetAsync(input);
         DbSet.Remove(result);

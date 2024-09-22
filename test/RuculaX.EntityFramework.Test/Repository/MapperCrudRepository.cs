@@ -8,14 +8,13 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
     public MapperCrudRepository(RepositoryCrudBaseAsync<User, string> repository) : base(repository)
     {
     }
-    public override async Task AlterAsync(UserDTo inputDto, IAlterMap<User> map)
+    public override async Task AlterAsync(UserDTo inputDto)
     {
         User user = new()
         {
             Id = inputDto.Id
         };
-
-        await this.Repository.AlterAsync(user, map);
+        await this.Repository.AlterAsync(user, new AlterMapUser(inputDto));
     }
 
     public override async Task AlterAsync(UserDTo inputDto, Expression<Func<User, bool>> predicate)
@@ -71,5 +70,20 @@ public class MapperCrudRepository : RepositoryCrudMApAsync<User, UserDTo, string
             Id = inputDto.Id
         };
         await Repository.InsertAsync(user);
+    }
+}
+
+
+public class AlterMapUser : IAlterMap<User>
+{
+    UserDTo _inputDto;
+    public AlterMapUser(UserDTo inputDto)
+    {
+        _inputDto = inputDto;
+    }
+    public User Map(User entity)
+    {
+        entity.Id = _inputDto.Id;
+    return entity;
     }
 }
