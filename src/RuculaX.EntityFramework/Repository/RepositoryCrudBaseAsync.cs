@@ -14,9 +14,9 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlte
         DbSet = context.GetModel<TEntity,TType>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound); 
     }
 
-    public virtual async Task AlterAsync(TEntity input, IAlterMap<TEntity> map)
+    public virtual async Task AlterAsync(TEntity entity, IAlterMap<TEntity> map, IQueryable<TEntity> dbSetConfigured = null)
     {
-        var result = await GetAsync(input);
+        var result = await GetAsync(entity, dbSetConfigured);
         var resultMap =  map.Map(result);
         
         var hashResult =  result.GetHashCode();
@@ -41,7 +41,7 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlte
         this.DbSet.Update(input);
     }
 
-  public virtual async Task DeleteAsync(TEntity input)
+    public virtual async Task DeleteAsync(TEntity input)
     {
         var result = await GetAsync(input);
         DbSet.Remove(result);
