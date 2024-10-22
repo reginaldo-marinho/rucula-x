@@ -1,13 +1,6 @@
 ﻿namespace RuculaX.Domain;
 
 /// <summary>
-/// Provides an Identification for a Data Transfer Object
-/// </summary>
-public interface IEntityDto
-{   
-}
-
-/// <summary>
 /// Indicates that the Entity Has a Unique Identifier
 /// </summary>
 /// <typeparam name="T"></typeparam>
