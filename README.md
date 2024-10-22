@@ -11,4 +11,4 @@ Por Exemplo, em modelo de dominio é comum trabalharmos com entidades que herdam
 - [Identidade Única com Entity](./src/RuculaX.Domain/README.md)
 - [Repositório Base](./src/RuculaX.EntityFramework/README.md)
 - [Unidade Lógica de Trabalho](./src/RuculaX.EntityFramework/README.md)
-- [Fabrica de Query - Recurso para suporte a paginação](./src/RuculaX.Database/Ruculax.Database.csproj)
+- [Fabrica de Query - Recurso para suporte a paginação](./src/RuculaX.Database/README.md)
