@@ -18,5 +18,6 @@
     <Authors>Reginaldo Marinho</Authors>
     <Company>RuculaX</Company>
     <Product>Rucula Entity Framework</Product>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 </Project>

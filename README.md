@@ -8,9 +8,7 @@ Por Exemplo, em modelo de dominio é comum trabalharmos com entidades que herdam
 </p>
 
 ## Soluções Disponíveis
-- [Identidade Única]()
-- [Repositório Genérico]()
-- [Repositório Genérico Concreto]()
-- [Repositório Genérico Concreto de Mapeamento de Acesso a Dados ]()
-- [Unidade Lógica de Trabalho]()
-- [Fabrica de Query]()
+- [Identidade Única com Entity](./src/RuculaX.Domain/README.md)
+- [Repositório Base](./src/RuculaX.EntityFramework/README.md)
+- [Unidade Lógica de Trabalho](./src/RuculaX.EntityFramework/README.md)
+- [Fabrica de Query - Recurso para suporte a paginação](./src/RuculaX.Database/Ruculax.Database.csproj)

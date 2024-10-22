@@ -1,7 +1,7 @@
-# Camada de Acesso a Dados
+# Ruculax.Database
+Fornece suporte para camada de acesso a dados.
 
-
-## Query
+## Query Paginada
 Fornece serviço para criação de queries paginadas. Isso garante que diversas consultas criadas, possam ser utilizadas em inumeras localidades dentro de uma aplicação.
 
 ### Implementação
@@ -160,4 +160,4 @@ public class QueryController : ControllerBase
 ```
 
 ## WhereIf
-Esse método estático ajuda na leitura condicional criadas nas nossas **Queries**.
+Use esse método de extensão para logica condicional dentro das **Queries**.
