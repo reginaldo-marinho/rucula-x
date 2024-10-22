@@ -1,5 +1,27 @@
-# Ruculax.Database
-Fornece suporte para camada de acesso a dados.
+<p align="center">
+    <img src="../../Ruculax.png" style="width:200px">
+    <h1 align="center"> Ruculax.Database</h1>    
+</p>
+
+<p align="center">
+  <a href="https://circleci.com/gh/angular/workflows/angular/tree/main">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
+  </a>&nbsp;
+  <a href="https://www.nuget.org/packages/RuculaX.Database/">
+    <img src="https://img.shields.io/nuget/v/RuculaX.Database" alt="Version RuculaX Entity Framewrok" />
+  </a>&nbsp;
+  <a href="https://github.com/reginaldo-marinho/rucula-x/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+   <a href="https://github.com/reginaldo-marinho/rucula-x/commits/main">
+    <img src="https://img.shields.io/github/last-commit/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+
+   <a href="https://www.nuget.org/packages/RuculaX.Database/">
+    <img src="https://img.shields.io/nuget/dt/RuculaX.Database" alt="Discord conversation" />
+  </a>
+</p>
+
 
 ## Query Paginada
 Fornece serviço para criação de queries paginadas. Isso garante que diversas consultas criadas, possam ser utilizadas em inumeras localidades dentro de uma aplicação.

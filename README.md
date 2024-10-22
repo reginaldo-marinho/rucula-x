@@ -1,14 +1,25 @@
-# RuculaX
-RuculaX é projeto que tem como principal objetivo, entender situações repetidadas que encontramos durante o desenvolvimento de um software e resolver de uma forma mais simples.
-
-Por Exemplo, em modelo de dominio é comum trabalharmos com entidades que herdam de Entity, onde essa entidade contém propriedades que garantem que ela seja única. Assim sendo o RuculaX contém uma classe `Entity<T>` que garante na sua herança a criação de uma identidade única.
-
 <p align="center">
-<img src="Ruculax.png" style="width:200px">
+    <img src="Ruculax.png" style="width:200px">
+    <h1 align="center"> Ruculax</h1>
+    <div>
+    RuculaX é projeto que tem como principal objetivo, entender situações repetidadas que encontramos durante o desenvolvimento de um software e resolver de uma forma mais simples.
+    </div>
 </p>
 
-## Soluções Disponíveis
-- [Identidade Única com Entity](./src/RuculaX.Domain/README.md)
-- [Repositório Base](./src/RuculaX.EntityFramework/README.md)
-- [Unidade Lógica de Trabalho](./src/RuculaX.EntityFramework/README.md)
-- [Fabrica de Query - Recurso para suporte a paginação](./src/RuculaX.Database/README.md)
+<p align="center">
+  <a href="https://circleci.com/gh/angular/workflows/angular/tree/main">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
+  </a>&nbsp;
+
+  <a href="https://github.com/reginaldo-marinho/rucula-x/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+   <a href="https://github.com/reginaldo-marinho/rucula-x/commits/main">
+    <img src="https://img.shields.io/github/last-commit/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+</p>
+
+## Percorra por Camadas e Especialidades 
+- [Dominio](./src/RuculaX.Domain/README.md)
+- [EntityFramework](./src/RuculaX.EntityFramework/README.md)
+- [Database](./src/RuculaX.EntityFramework/README.md)

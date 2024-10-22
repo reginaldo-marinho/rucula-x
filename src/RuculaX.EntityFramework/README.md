@@ -1,4 +1,28 @@
-# Ruculax Entity Framework
+<p align="center">
+    <img src="../../Ruculax.png" style="width:200px">
+    <h1 align="center"> Ruculax Entity Framework</h1>
+</p>
+
+<p align="center">
+  <a href="https://circleci.com/gh/angular/workflows/angular/tree/main">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
+  </a>&nbsp;
+  <a href="https://www.nuget.org/packages/RuculaX.EntityFramework/">
+    <img src="https://img.shields.io/nuget/v/RuculaX.EntityFramework" alt="Version RuculaX Entity Framewrok" />
+  </a>&nbsp;
+  <a href="https://github.com/reginaldo-marinho/rucula-x/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+   <a href="https://github.com/reginaldo-marinho/rucula-x/commits/main">
+    <img src="https://img.shields.io/github/last-commit/reginaldo-marinho/rucula-x" alt="Discord conversation" />
+  </a>
+
+   <a href="https://www.nuget.org/packages/RuculaX.EntityFramework/">
+    <img src="https://img.shields.io/nuget/dt/RuculaX.EntityFramework" alt="Discord conversation" />
+  </a>
+</p>
+
+## Criando Repositório
 
 Se você deseja criar repositórios consistentes, com muita pouca linha de codigo, esse projeto é para você. 
 
@@ -13,8 +37,6 @@ public class RepositorySale : RepositoryCrudBaseAsync<Sale, string>
     }
 }
 ```
-
-## Criando Repositório
 
 ###  Garanta que seus Modelos sejam Entidades
 
