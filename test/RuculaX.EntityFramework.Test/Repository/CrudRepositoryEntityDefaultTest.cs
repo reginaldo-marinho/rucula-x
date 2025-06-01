@@ -7,7 +7,7 @@ namespace RuculaX.EntityFramework.Test;
 [TestClass]
 public class CrudRepositoryEntityDefaultTest
 {
-    TestContext ctx = DbInMemory.GetContext();
+    TestContext ctx = DbInMemory.CreateContextTest();
     RepositoryUser repositoryUser;
     public CrudRepositoryEntityDefaultTest()
     {

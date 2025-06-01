@@ -10,7 +10,7 @@ public class UnifOfWorkTest
     public async Task ExecCommandAsync()
     {
 
-        var ctx = DbInMemory.GetContext();
+        var ctx = DbInMemory.CreateContextTest();
 
         RepositoryUser user = new (ctx);
         RepositoryUserDetail userDetail = new (ctx);

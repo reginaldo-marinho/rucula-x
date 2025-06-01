@@ -5,7 +5,7 @@ namespace RuculaX.EntityFramework.Test.Repository
     [TestClass]
     public class AlterMapTest
     {
-        TestContext ctx = DbInMemory.GetContext();
+        TestContext ctx = DbInMemory.CreateContextTest();
         RepositoryUser repositoryUser;
         public AlterMapTest()
         {
