@@ -2,5 +2,5 @@
 
 public interface IQuery
 {
-    Task<IQueryConfigurationOutput> QueryAsync(IQueryConfigurationInput config);
+    Task<QueryConfigurationOutput> QueryAsync(IQueryConfigurationInput config);
 }

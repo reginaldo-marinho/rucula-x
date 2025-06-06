@@ -4,20 +4,20 @@ using RuculaX.Database.Query;
 
 namespace Ruculax.Database.Test;
 
-public class UserQuery : PaginationAsync, IQuery
+public class UserQuery : PaginationAsync<User>, IQuery
 {
     QueryConnetion _connetion;
     public UserQuery(QueryConnetion connetion)
     {
         _connetion = connetion;
     }
-    public async Task<IQueryConfigurationOutput> QueryAsync(IQueryConfigurationInput config)
+    public async Task<QueryConfigurationOutput> QueryAsync(IQueryConfigurationInput config)
     {
         var output = await QueryAsync(config.Page,config);
         return output;
     }
 
-    protected async override Task<IQueryConfigurationOutput> FirstAsync(IQueryConfigurationInput config)
+    protected async override Task<QueryConfigurationOutput<User>> FirstAsync(IQueryConfigurationInput config)
     {
         var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
 
@@ -33,18 +33,18 @@ public class UserQuery : PaginationAsync, IQuery
         
         var optionsOutput = new UserQueryOptions(lastUser.Id);
 
-        var output = new QueryConfigurationOutput()
+        var output = new QueryConfigurationOutput<User>()
         {
             Name = nameof(User),
             Description = "Teste de paginação para usuários",
             Options = JsonSerializer.Serialize(optionsOutput),
-            Data = JsonSerializer.Serialize(users)
+            Data = users
         };
 
         return output;
     }
 
-    protected async override Task<IQueryConfigurationOutput> LastAsync(IQueryConfigurationInput config)
+    protected async override Task<QueryConfigurationOutput<User>> LastAsync(IQueryConfigurationInput config)
     {
         var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
 
@@ -61,19 +61,19 @@ public class UserQuery : PaginationAsync, IQuery
         
         var optionsOutput = new UserQueryOptions(lastUser.Id);
 
-        var output = new QueryConfigurationOutput()
+        var output = new QueryConfigurationOutput<User>()
         {
             Name = nameof(User),
             Description = "Teste de paginação para usuários",
             Options = JsonSerializer.Serialize(optionsOutput),
-            Data = JsonSerializer.Serialize(users)
+            Data = users
         };
 
         return output;   
         
     }
 
-    protected override async Task<IQueryConfigurationOutput> NextAsync(IQueryConfigurationInput config)
+    protected override async Task<QueryConfigurationOutput<User>> NextAsync(IQueryConfigurationInput config)
     {
         var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
 
@@ -89,19 +89,19 @@ public class UserQuery : PaginationAsync, IQuery
         
         var optionsOutput = new UserQueryOptions(lastUser.Id);
 
-        var output = new QueryConfigurationOutput()
+        var output = new QueryConfigurationOutput<User>()
         {
             Name = nameof(User),
             Description = "Teste de paginação para usuários",
             Options = JsonSerializer.Serialize(optionsOutput),
-            Data = JsonSerializer.Serialize(users)
+            Data = users
         };
 
         return output;
 
     }
 
-    protected async override Task<IQueryConfigurationOutput> PreviousAsync(IQueryConfigurationInput config)
+    protected async override Task<QueryConfigurationOutput<User>> PreviousAsync(IQueryConfigurationInput config)
     {
         var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
 
@@ -119,18 +119,18 @@ public class UserQuery : PaginationAsync, IQuery
         
         var optionsOutput = new UserQueryOptions(lastUser.Id);
 
-        var output = new QueryConfigurationOutput()
+        var output = new QueryConfigurationOutput<User>()
         {
             Name = nameof(User),
             Description = "Teste de paginação para usuários",
             Options = JsonSerializer.Serialize(optionsOutput),
-            Data = JsonSerializer.Serialize(users)
+            Data = users
         };
 
         return output;
     }
 
-    protected async override Task<IQueryConfigurationOutput> ContainAsync(IQueryConfigurationInput config)
+    protected async override Task<QueryConfigurationOutput<User>> ContainAsync(IQueryConfigurationInput config)
     {
         var optionsInput = JsonSerializer.Deserialize<UserQueryOptions>(config.Options);
 
@@ -146,12 +146,12 @@ public class UserQuery : PaginationAsync, IQuery
         
         var optionsOutput = new UserQueryOptions(lastUser.Id);
 
-        var output = new QueryConfigurationOutput()
+        var output = new QueryConfigurationOutput<User>()
         {
             Name = nameof(User),
             Description = "Teste de paginação para usuários",
             Options = JsonSerializer.Serialize(optionsOutput),
-            Data = JsonSerializer.Serialize(users)
+            Data = users
         };
 
         return output;

@@ -11,7 +11,7 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlte
 
     public  RepositoryCrudBaseAsync(DbContext context)
     {
-        DbSet = context.GetModel<TEntity,TType>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound); 
+        DbSet = context.GetModel<TEntity>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound); 
     }
 
     public virtual async Task AlterAsync(TEntity entity, IAlterMap<TEntity> map, IQueryable<TEntity> dbSetConfigured = null)

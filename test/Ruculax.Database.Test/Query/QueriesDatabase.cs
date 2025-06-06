@@ -2,7 +2,7 @@
 
 namespace Ruculax.Database.Test;
 
-public class QueriesDatabase : Queries
+public class QueriesDatabase : PagedQuery
 {
     public QueriesDatabase()
     {

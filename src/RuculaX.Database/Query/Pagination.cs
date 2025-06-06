@@ -30,21 +30,54 @@ namespace RuculaX.Database.Query
     /// <summary>
     /// Provides methods for implements logic for optios of Page
     /// </summary>    
-    public abstract class PaginationAsync
+    public abstract class PaginationAsync<T>
     {
-        protected abstract Task<IQueryConfigurationOutput> FirstAsync(IQueryConfigurationInput config);
-        protected abstract Task<IQueryConfigurationOutput> LastAsync(IQueryConfigurationInput config);
-        protected abstract Task<IQueryConfigurationOutput> NextAsync(IQueryConfigurationInput config);
-        protected abstract Task<IQueryConfigurationOutput> PreviousAsync(IQueryConfigurationInput config);
-        protected abstract Task<IQueryConfigurationOutput> ContainAsync(IQueryConfigurationInput config);
+        /// <summary>
+        /// Creates the query that represents the first page based on the IQueryConfigurationInput
+        /// </summary>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput</returns>
+        protected abstract Task<QueryConfigurationOutput<T>> FirstAsync(IQueryConfigurationInput config);
+        /// <summary>
+        /// Creates the query that represents the last page based on the IQueryConfigurationInput
+        /// </summary>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput<T></returns>
+        protected abstract Task<QueryConfigurationOutput<T>> LastAsync(IQueryConfigurationInput config);
+        /// <summary>
+        /// Creates the query that represents the next page based on the IQueryConfigurationInput.
+        /// </summary>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput<T></returns>
+        protected abstract Task<QueryConfigurationOutput<T>> NextAsync(IQueryConfigurationInput config);
+        /// <summary>
+        /// Creates the query that represents the previous page based on the IQueryConfigurationInput.
+        /// </summary>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput<T></returns>
+        protected abstract Task<QueryConfigurationOutput<T>> PreviousAsync(IQueryConfigurationInput config);
 
-        public async Task<IQueryConfigurationOutput> QueryAsync(byte option, IQueryConfigurationInput config)
+        /// <summary>
+        /// Creates the query that represents the contain page based on the IQueryConfigurationInput.
+        /// </summary>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput<T></returns>
+
+        protected abstract Task<QueryConfigurationOutput<T>> ContainAsync(IQueryConfigurationInput config);
+
+        /// <summary>
+        /// Calls the pagination query. option indicates which method will be used
+        /// </summary>
+        /// <param name="option">byte</param>
+        /// <param name="config">IQueryConfigurationInput</param>
+        /// <returns>QueryConfigurationOutput</returns>
+        public async Task<QueryConfigurationOutput> QueryAsync(byte option, IQueryConfigurationInput config)
         {
-            if(option == (byte)OptionPagination.First) return await FirstAsync(config);
-            if(option == (byte)OptionPagination.Next) return  await NextAsync(config);
-            if(option == (byte)OptionPagination.Previous) return await PreviousAsync(config);
-            if(option == (byte)OptionPagination.Last) return await LastAsync(config);
-            if(option == (byte)OptionPagination.Contain) return await ContainAsync(config);
+            if (option == (byte)OptionPagination.First) return await FirstAsync(config);
+            if (option == (byte)OptionPagination.Next) return await NextAsync(config);
+            if (option == (byte)OptionPagination.Previous) return await PreviousAsync(config);
+            if (option == (byte)OptionPagination.Last) return await LastAsync(config);
+            if (option == (byte)OptionPagination.Contain) return await ContainAsync(config);
 
             throw new PaginationException(PaginationException.OptionPagination);
         }

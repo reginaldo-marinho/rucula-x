@@ -3,34 +3,34 @@
 namespace RuculaX.Database.Query;
 
 /// <summary>
-/// Create IQuery instances
+/// Create IPagedQuery instances
 /// </summary>
 /// <typeparam name="IConnection"></typeparam>
 public class FactoryQuery<IConnection> : IQuery
 {
     private IConnection _connection;
-    private readonly IQueries _queries;
+    private readonly IPagedQuery _queries;
 
-    public FactoryQuery(IConnection connection, IQueries queries)
+    public FactoryQuery(IConnection connection, IPagedQuery queries)
     {
         _connection = connection;
         _queries = queries;
     }
-    
-    public async Task<IQueryConfigurationOutput> QueryAsync(IQueryConfigurationInput config)
+
+    public async Task<QueryConfigurationOutput> QueryAsync(IQueryConfigurationInput input)
     {
-        var typeQuery = _queries.Get(config.Name);
+        var typeQuery = _queries.Get(input.Name);
 
         ConstructorInfo constructor = typeQuery.GetConstructor(new Type[] {typeof(IConnection)});
-        
+
         if(constructor is not null)
         {
             var @params = new object[]{_connection};
-            
+
             IQuery query = (IQuery)constructor.Invoke(@params);
-            return await query.QueryAsync(config);
+            return await query.QueryAsync(input);
         }
-        
-        throw new Exception($"{nameof(typeQuery)} {config.Name}  not exist!");
+
+        throw new Exception($"{nameof(typeQuery)} {input.Name}  not exist!");
     }
 }

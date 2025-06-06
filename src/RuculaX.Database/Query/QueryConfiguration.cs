@@ -15,28 +15,22 @@ public interface IQueryConfigurationInput : IQueryConfiguration
 
 public sealed class QueryConfigurationInput : IQueryConfigurationInput
 {
-    public string Name { get;set; }
-    public int RowNumber { get;set; } = 50;
+    public string Name { get; set; }
+    public int RowNumber { get; set; } = 50;
     public string Options { get; set; } = "{}";
-    public byte Page { get;set; } = (byte)OptionPagination.Next;
-    public string Text { get;set; } = "";
-
+    public byte Page { get; set; } = (byte)OptionPagination.Next;
+    public string Text { get; set; } = "";
 }
 
-public interface IQueryConfigurationOutput : IQueryConfiguration
+public class QueryConfigurationOutput
 {
-    string Description { get;set; }
-    string Data { get; set;}
 }
-
-public class QueryConfigurationOutput : IQueryConfigurationOutput
+public class QueryConfigurationOutput<T> : QueryConfigurationOutput, IQueryConfiguration
 {
-    public string Name { get; set;}
-    public string Description {get; set;}
+    public string Name { get; set; }
+    public string Description { get; set; }
     public string Options { get; set; }
-    public string Data { get; set;}
-    public int RowNumber { get;set; } = 50;
-    public string Text { get;set; } = "";
-
+    public List<T> Data { get; set; }
+    public int RowNumber { get; set; } = 50;
+    public string Text { get; set; } = "";
 }
-

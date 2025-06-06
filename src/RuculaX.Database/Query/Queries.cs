@@ -1,11 +1,11 @@
 ﻿namespace RuculaX.Database.Query;
 
-public interface IQueries
+public interface IPagedQuery
 {
     Type Get(string name);
 }
 
-public abstract class Queries : IQueries
+public abstract class PagedQuery : IPagedQuery
 {
     private List<KeyValuePair<string,Type>> grids = new ();
     

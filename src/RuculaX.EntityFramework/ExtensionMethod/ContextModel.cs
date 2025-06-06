@@ -1,12 +1,11 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
 public static class ContextModel
 {
-    public static  DbSet<TEntity>? GetModel<TEntity,TType>(this DbContext obj) where TEntity:Entity<TType>
+    public static  DbSet<TEntity>? GetModel<TEntity>(this DbContext obj) where TEntity : class
     {
         Type type = obj.GetType();
 

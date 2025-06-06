@@ -21,8 +21,8 @@ public class QueryFactoryTest
             Options = "{\"LastId\": 0}"
         };
 
-        var pageOne = await factoryQuery.QueryAsync(userPageOne);
-        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageOne.Data);
+        var pageOne = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  pageOne.Data;
 
         Assert.AreEqual(usersPageOne[0].Name, "Reginaldo");
         Assert.AreEqual(usersPageOne[1].Name, "Luis");
@@ -39,8 +39,8 @@ public class QueryFactoryTest
             Options = JsonSerializer.Serialize(userOptions)
         };
 
-        var pageTwo = await factoryQuery.QueryAsync(userPageTwo);
-        var usersPageTwo = JsonSerializer.Deserialize<List<User>>(pageTwo.Data);
+        var pageTwo = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPageTwo);
+        var usersPageTwo = pageTwo.Data;
 
         Assert.AreEqual(usersPageTwo[0].Name, "Nathalia");
         Assert.AreEqual(usersPageTwo[1].Name, "Elizangela");
@@ -54,8 +54,8 @@ public class QueryFactoryTest
             
         };
 
-        var pagePrevious = await factoryQuery.QueryAsync(userPagePreviousOne);
-        var usersPagePrevious = JsonSerializer.Deserialize<List<User>>(pagePrevious.Data);
+        var pagePrevious = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPagePreviousOne);
+        var usersPagePrevious = pagePrevious.Data;
 
         Assert.AreEqual(usersPagePrevious[0].Name, "Reginaldo");
         Assert.AreEqual(usersPagePrevious[1].Name, "Luis");
@@ -76,8 +76,8 @@ public class QueryFactoryTest
             RowNumber = 2
         };
 
-        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
-        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+        var pageFirst = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  pageFirst.Data;
 
         Assert.AreEqual(usersPageOne[0].Name, "Reginaldo");
         Assert.AreEqual(usersPageOne[1].Name, "Luis");
@@ -97,8 +97,8 @@ public class QueryFactoryTest
             RowNumber = 2
         };
 
-        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
-        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+        var pageFirst = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  pageFirst.Data;
 
         Assert.AreEqual(usersPageOne[0].Name, "Ronald");
         Assert.AreEqual(usersPageOne[1].Name, "Raquel");
@@ -120,8 +120,8 @@ public class QueryFactoryTest
             Text = "ald" 
         };
 
-        var pageFirst = await factoryQuery.QueryAsync(userPageOne);
-        var usersPageOne =  JsonSerializer.Deserialize<List<User>>(pageFirst.Data);
+        var pageFirst = (QueryConfigurationOutput<User>)await factoryQuery.QueryAsync(userPageOne);
+        var usersPageOne =  pageFirst.Data;
 
         Assert.AreEqual(usersPageOne[0].Name, "Reginaldo");
         Assert.AreEqual(usersPageOne[1].Name, "Ronald");
