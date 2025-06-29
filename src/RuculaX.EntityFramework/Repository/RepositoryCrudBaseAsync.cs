@@ -5,26 +5,28 @@ using RuculaX.Domain;
 
 namespace RuculaX.EntityFramework;
 
-public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlterMapAdpter<TEntity> where TEntity : Entity<TType> 
+public class RepositoryCrudBaseAsync<TEntity, TType> : ICrudAsync<TEntity>, IAlterMapAdpter<TEntity> where TEntity : Entity<TType>
 {
     public DbSet<TEntity> DbSet;
+    private DbContext _context;
 
-    public  RepositoryCrudBaseAsync(DbContext context)
+    public RepositoryCrudBaseAsync(DbContext context)
     {
-        DbSet = context.GetModel<TEntity>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound); 
+        _context = context;
+        DbSet = context.GetModel<TEntity>() ?? throw new RepositoryException(RepositoryException.DbSetNotFound);
     }
 
     public virtual async Task AlterAsync(TEntity entity, IAlterMap<TEntity> map, IQueryable<TEntity> dbSetConfigured = null)
     {
         var result = await GetAsync(entity, dbSetConfigured);
-        var resultMap =  map.Map(result);
-        
-        var hashResult =  result.GetHashCode();
-        var hashMap =  resultMap.GetHashCode();
-        
-        if( hashResult != hashMap)
+        var resultMap = map.Map(result);
+
+        var hashResult = result.GetHashCode();
+        var hashMap = resultMap.GetHashCode();
+
+        if (hashResult != hashMap)
         {
-            var message = string.Format(RepositoryException.ObjectHashNotEqualInMap,hashMap,hashResult);
+            var message = string.Format(RepositoryException.ObjectHashNotEqualInMap, hashMap, hashResult);
             throw new RepositoryException(message);
         }
 
@@ -53,23 +55,28 @@ public class RepositoryCrudBaseAsync<TEntity,TType> : ICrudAsync<TEntity>, IAlte
         DbSet.Remove(result);
     }
 
-    public async Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null,  CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken cancellationToken = default)
     {
         dbSetConfigured ??= DbSet;
-        var expression = input.CreateExpressionDefaultEntity<TEntity,TType>();
-        var result = await dbSetConfigured.FirstAsync(expression,cancellationToken);
-        return result;     
+        var expression = input.CreateExpressionDefaultEntity<TEntity, TType>();
+        var result = await dbSetConfigured.FirstAsync(expression, cancellationToken);
+        return result;
     }
 
     public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken cancellationToken = default)
     {
         dbSetConfigured ??= DbSet;
-        var result = await dbSetConfigured.FirstAsync(predicate,cancellationToken);
+        var result = await dbSetConfigured.FirstAsync(predicate, cancellationToken);
         return result;
     }
 
     public async Task InsertAsync(TEntity input)
     {
         await DbSet.AddAsync(input);
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }
