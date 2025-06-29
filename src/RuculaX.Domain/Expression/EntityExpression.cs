@@ -89,7 +89,7 @@ public static class EntityExpression
         
         if(type.BaseType?.FullName == typeof(Object).FullName)
         {
-            throw new EntityBaseException(EntityBaseException.TypeEntityNotExist);
+            throw new RuculaxEntityBaseException(RuculaxEntityBaseException.TypeEntityNotExist);
         }
 
         if(type.BaseType?.FullName == typeof(Entity<TType>).FullName){
