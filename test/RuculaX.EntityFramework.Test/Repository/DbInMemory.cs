@@ -23,17 +23,17 @@ public class DbInMemory
         context.Database.EnsureCreated();
 
         context.User.AddRange(
-            new User { Name = "Reginaldo", Id = "123",
+            new User("123") { Name = "Reginaldo",
             Addreass = new Addreass {
                  Id="123",
                  CEP = "Cep Reginaldo"
             } },
-            new User { Name = "Raquel",Id = "456",
+            new User("456") { Name = "Raquel",
             Addreass = new Addreass {
                  Id="456",
                  CEP = "Cep Raquel"
             } },
-            new User { Name = "Nathalia",Id = "789",
+            new User("789") { Name = "Nathalia",
             Addreass = new Addreass {
                  Id="789",
                  CEP = "Cep Nathalia"
@@ -41,9 +41,9 @@ public class DbInMemory
 
 
         context.UserDetails.AddRange(
-            new UserDetails { Id = "123", RowNumber = 1 },
-            new UserDetails { Id = "456", RowNumber = 2 },
-            new UserDetails { Id = "789", RowNumber = 3 });
+            new UserDetails ("123"){ RowNumber = 1 },
+            new UserDetails ("456"){ RowNumber = 2 },
+            new UserDetails ("789"){ RowNumber = 3 });
             
         context.SaveChanges();
     }

@@ -9,7 +9,6 @@
     <Authors>Reginaldo Marinho</Authors>
     <Company>RuculaX</Company>
     <Product>Rucula Domain</Product>
-    <PackageReadmeFile>README.md</PackageReadmeFile>    
   </PropertyGroup>
 
   <ItemGroup>

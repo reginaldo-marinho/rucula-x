@@ -17,7 +17,7 @@ namespace RuculaX.EntityFramework.Test.Repository
         {
             const string userIDLucasMarinho = "2351r545234t5423dv";
 
-            await repositoryUser.InsertAsync(new User { Id = userIDLucasMarinho, Name = "Lucas", Addreass = new Addreass {
+            await repositoryUser.InsertAsync(new User(userIDLucasMarinho){Name = "Lucas", Addreass = new Addreass {
                 Id = userIDLucasMarinho,
                 CEP = ""
             }});
@@ -25,7 +25,7 @@ namespace RuculaX.EntityFramework.Test.Repository
             await ctx.SaveChangesAsync();
 
             await Assert.ThrowsExceptionAsync<RepositoryException>(async () => 
-                await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho}, new MapUserTest())
+                await repositoryUser.AlterAsync(new User(userIDLucasMarinho), new MapUserTest())
             );
         }
     }
@@ -37,15 +37,13 @@ namespace RuculaX.EntityFramework.Test.Repository
         {
             const string userIDLucasMarinho = "2351r545234t5423dv";
 
-            var user =  new User { Id = userIDLucasMarinho, Name = "Lucas Marinho", 
+            var user =  new User(userIDLucasMarinho) {Name = "Lucas Marinho", 
                 Addreass = new Addreass 
                 {
                     Id = userIDLucasMarinho,
                     CEP = "132333453"
                 }
             };
-
-            entity.Id = user.Id;
             entity.Name = user.Name;
             entity.Addreass.Id = user.Addreass.Id;
             entity.Addreass.CEP = user.Addreass.CEP;

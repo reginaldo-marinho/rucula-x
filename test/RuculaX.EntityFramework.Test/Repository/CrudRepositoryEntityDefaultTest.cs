@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RuculaX.Database.Common.Crud;
 
 namespace RuculaX.EntityFramework.Test;
 
@@ -19,11 +18,11 @@ public class CrudRepositoryEntityDefaultTest
     {
         const string userIDReginaldo = "328409809";
         
-        await repositoryUser.InsertAsync(new User { Id = userIDReginaldo, Name = "Reginaldo"});
+        await repositoryUser.InsertAsync(new User(userIDReginaldo) { Name = "Reginaldo"});
 
         await ctx.SaveChangesAsync();
 
-        var user = await repositoryUser.GetAsync(new User { Id = userIDReginaldo});
+        var user = await repositoryUser.GetAsync(new User(userIDReginaldo));
 
         Assert.AreEqual(user != null, true);
     }
@@ -33,11 +32,11 @@ public class CrudRepositoryEntityDefaultTest
     {
         const string userIDLucas = "438917070498247";
         
-        await repositoryUser.InsertAsync(new User { Id = userIDLucas, Name = "Lucas"});
+        await repositoryUser.InsertAsync(new User(userIDLucas) { Name = "Lucas"});
 
         await ctx.SaveChangesAsync();
 
-        var users = await repositoryUser.GetAsync(new User { Id = userIDLucas});
+        var users = await repositoryUser.GetAsync(new User(userIDLucas));
 
         Assert.AreEqual(users != null, true);
     }
@@ -47,16 +46,16 @@ public class CrudRepositoryEntityDefaultTest
     {
         const string userIDLucasMarinho = "2351r545234t5423dv";
 
-        await repositoryUser.InsertAsync(new User { Id = userIDLucasMarinho, Name = "Lucas", Addreass = new Addreass {
+        await repositoryUser.InsertAsync(new User(userIDLucasMarinho) {Name = "Lucas", Addreass = new Addreass {
              Id = userIDLucasMarinho,
              CEP = ""
         }});
 
         await ctx.SaveChangesAsync();
 
-        await repositoryUser.AlterAsync(new User { Id = userIDLucasMarinho}, new MapUserInAlter());
+        await repositoryUser.AlterAsync(new User (userIDLucasMarinho), new MapUserInAlter());
 
-        var user = await repositoryUser.GetAsync(new User { Id = userIDLucasMarinho});
+        var user = await repositoryUser.GetAsync(new User(userIDLucasMarinho));
 
         Assert.AreEqual(user.Name,"Lucas Marinho");
         Assert.AreEqual(user.Addreass.CEP,"132333453");
@@ -67,17 +66,17 @@ public class CrudRepositoryEntityDefaultTest
     {
         const string userIDJorge = "432432243234342";
 
-        await repositoryUser.InsertAsync(new User { Id = userIDJorge, Name = "Jorge"});
+        await repositoryUser.InsertAsync(new User(userIDJorge) { Name = "Jorge"});
 
         await ctx.SaveChangesAsync();
 
-        var user = await repositoryUser.GetAsync(new User { Id = userIDJorge});
+        var user = await repositoryUser.GetAsync(new User (userIDJorge));
 
         await repositoryUser.DeleteAsync(user);
 
         await ctx.SaveChangesAsync();
 
-        await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await repositoryUser.GetAsync(new User { Id = userIDJorge}));
+        await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await repositoryUser.GetAsync(new User(userIDJorge)));
 
     }
 }
@@ -95,12 +94,11 @@ public class MapUserInAlter : IAlterMap<User>
   {
         const string userIDLucasMarinho = "2351r545234t5423dv";
 
-        var user =  new User { Id = userIDLucasMarinho, Name = "Lucas Marinho", Addreass = new Addreass {
+        var user =  new User(userIDLucasMarinho) {Name = "Lucas Marinho", Addreass = new Addreass {
             Id = userIDLucasMarinho,
             CEP = "132333453"
         }};
 
-        entity.Id = user.Id;
         entity.Name = user.Name;
         entity.Addreass.Id = user.Addreass.Id;
         entity.Addreass.CEP = user.Addreass.CEP;

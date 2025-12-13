@@ -16,15 +16,14 @@ public class CrudRepositoryEntityCustomTest
     [TestMethod]
     public async Task GetCustomIdentityAsync()
     {
-        var userDetails = new UserDetails { Id = "324909340", RowNumber = 1, Description = "First Info" };
+        var userDetails = new UserDetails ("324909340"){ RowNumber = 1, Description = "First Info" };
 
         await repositoryUserDetail.InsertAsync(userDetails);
 
         await ctx.SaveChangesAsync();
 
         var userDetail = await repositoryUserDetail.GetAsync(
-            new UserDetails {
-                Id = userDetails.Id,
+            new UserDetails(userDetails.Id) {
                 RowNumber = userDetails.RowNumber
         });
 
@@ -34,13 +33,13 @@ public class CrudRepositoryEntityCustomTest
     [TestMethod]
     public async Task AlterCustomEntityAsync()
     {
-        var userDetails = new UserDetails { Id = "3442234344", RowNumber = 1, Description = "First Info" };
+        var userDetails = new UserDetails("3442234344") { RowNumber = 1, Description = "First Info" };
         
         await repositoryUserDetail.InsertAsync(userDetails);
 
         await ctx.SaveChangesAsync();
 
-        var userDetailsEdit = new UserDetails { Id = "3442234344", RowNumber =  1};
+        var userDetailsEdit = new UserDetails("3442234344") { RowNumber =  1};
        
         await repositoryUserDetail.AlterAsync(userDetailsEdit, new MapUserDetailsInAlter());
 
@@ -61,13 +60,11 @@ public sealed class MapUserDetailsInAlter : IAlterMap<UserDetails>
 {
     public UserDetails Map(UserDetails entity)
     {
-        var userDetailsEdit = new UserDetails {
-            Id = "3442234344",
+        var userDetailsEdit = new UserDetails("3442234344") {
             RowNumber =  1,
             Description = "Second Info"
         };
 
-        entity.Id = userDetailsEdit.Id;
         entity.RowNumber = userDetailsEdit.RowNumber;
         entity.Description = userDetailsEdit.Description;
 

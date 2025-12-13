@@ -19,14 +19,12 @@ public class UnifOfWorkTest
         
         await uow.BeginAsync();
 
-        await user.InsertAsync(new User {
-                Id = "cwocwpcwpowcjowc",
+        await user.InsertAsync(new User("cwocwpcwpowcjowc") {
                 Name = "Reginaldo",
         });
         await uow.SaveChangesAsync();
 
-        await userDetail.InsertAsync(new UserDetails {
-                Id = "cwocwpcwpowcjowc",
+        await userDetail.InsertAsync(new UserDetails("cwocwpcwpowcjowc") {
                 RowNumber = 22,
                 Description = "Test"
         });

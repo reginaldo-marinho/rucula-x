@@ -7,11 +7,13 @@ namespace RuculaX.Database.Common.Crud;
 /// <typeparam name="TEntity"></typeparam>
 public interface ICrudAsync<TEntity>
 {
-    Task InsertAsync(TEntity input);   
-    Task AlterAsync(TEntity input);   
-    Task AlterAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
+    Task InsertAsync(TEntity input);
+    Task AlterAsync(TEntity input);
+    Task AlterAsync(TEntity input, Expression<Func<TEntity, bool>> predicate);
     Task DeleteAsync(TEntity input);
-    Task DeleteAsync(TEntity input,Expression<Func<TEntity, bool>> predicate);  
-    Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);  
-    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);       
+    Task DeleteAsync(TEntity input, Expression<Func<TEntity, bool>> predicate);
+    Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);
+    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default); 
+    Task<List<TEntity>> GetAllAsync(IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);  
+    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default);       
 }
