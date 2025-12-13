@@ -55,7 +55,22 @@ public class RepositoryCrudBaseAsync<TEntity, TType> : ICrudAsync<TEntity>, IAlt
         DbSet.Remove(result);
     }
 
-    public async Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> GetAllAsync(IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default)
+    {
+        dbSetConfigured ??= DbSet;
+        var result = await dbSetConfigured.ToListAsync(cancellationToken: token);
+        return result;
+
+    }
+
+    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, IQueryable<TEntity> dbSetConfigured = null, CancellationToken token = default)
+    {
+        dbSetConfigured ??= DbSet;
+        var result = await dbSetConfigured.Where(predicate).ToListAsync(cancellationToken: token);
+        return result;
+    }
+
+  public async Task<TEntity> GetAsync(TEntity input, IQueryable<TEntity> dbSetConfigured = null, CancellationToken cancellationToken = default)
     {
         dbSetConfigured ??= DbSet;
         var expression = input.CreateExpressionDefaultEntity<TEntity, TType>();
