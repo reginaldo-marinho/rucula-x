@@ -20,7 +20,7 @@ public class Entity<T>
     
     public void CheckId(T id)
     {
-        if (id is not null)
+        if (Id is not null)
         {
             throw new RuculaxEntityBaseException(RuculaxEntityBaseException.AlreadyHasAnIdentity);
         }
